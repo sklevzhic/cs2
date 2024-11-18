@@ -9,10 +9,6 @@ export const Footer = () => {
 
     const menu = [
         {
-            title: 'Company',
-            pathname: '/company-details',
-        },
-        {
             title: 'Shop',
             pathname: '/shop',
         },
