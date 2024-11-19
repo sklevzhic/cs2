@@ -27,7 +27,12 @@ export const Message: FC<MessageProps> = ({ text, time, align = 'left', isUser =
                     if (urlPattern.test(word)) {
                         return (
                             <React.Fragment key={wordIndex}>
-                                <a href={word} target="_blank" rel="noopener noreferrer">
+                                <a
+                                    href={word}
+                                    className={classNames(isUser ? 'text-white' : 'text-primary', 'hover:underline')}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
                                     {word}
                                 </a>{' '}
                             </React.Fragment>
