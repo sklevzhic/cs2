@@ -1,24 +1,32 @@
-import { MessageProps } from '@/widgets/chat-assistant/ui/message';
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { useOutsideClick } from '@/shared/hooks/use-on-outside-ckick';
 import { Button } from '@/shared/ui';
 import Icon from '@/shared/ui/icon';
 import { ChatBubble } from '@/widgets/chat-assistant/ui/сhat-bubble';
 import { ChatInput } from '@/widgets/chat-assistant/ui/chat-input';
+import { ChatMessage } from '@/shared/chat-assistant/chat-assistant';
 
 export interface ChatProps {
     chats: Array<{
-        avatar: { src: string; alt: string };
-        messages: Array<Omit<MessageProps, 'align'>>;
-        align: 'left' | 'right';
+        messages: Array<Omit<ChatMessage, 'align'>>;
     }>;
     onClose?: () => void;
+    onSend: (content: string) => void;
 }
 
-export const Chat: FC<ChatProps> = ({ chats, onClose }) => {
+export const Chat: FC<ChatProps> = ({ chats, onClose, onSend }) => {
     const chatRef = useOutsideClick<HTMLDivElement>(() => {
         onClose?.();
     });
+
+    const refMessages = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if (refMessages.current) {
+            refMessages.current.scrollTop = refMessages.current.scrollHeight;
+        }
+    }, [chats]);
+
     return (
         <div ref={chatRef} className="w-full h-[98vh] sm:w-[350px] sm:h-[500px] bg-white shadow rounded-xl overflow-hidden flex flex-col">
             <div className={'bg-blue-600 flex justify-between items-center'}>
@@ -32,13 +40,13 @@ export const Chat: FC<ChatProps> = ({ chats, onClose }) => {
                     </Button>
                 </div>
             </div>
-            <div className="grid flex-1 overflow-auto pb-11 p-2 scrollbar scrollbar-thumb-sky-700 scrollbar-track-sky-300">
-                {chats.map((chat, idx) => (
-                    <ChatBubble key={idx} {...chat} />
-                ))}
+            <div ref={refMessages} className="grid flex-1 w-full overflow-auto pb-5 p-2 scrollbar-thin scrollbar-thumb-primary scrollbar-track-gray-100">
+                {chats.map((chat, idx) => {
+                    return <ChatBubble key={idx} {...chat} />;
+                })}
             </div>
             <div className={'p-2'}>
-                <ChatInput />
+                <ChatInput onSend={onSend} />
             </div>
         </div>
     );

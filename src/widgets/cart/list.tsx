@@ -17,7 +17,7 @@ export const CartList = () => {
                             return <CartItem key={product.id} product={product} />;
                         })
                     ) : (
-                        <div className={'flex justify-center py-20 rounded-xl border p-2 text-lg text-white border-slate-400'}>Empty</div>
+                        <div className={'flex justify-center text-primary py-20 rounded-xl border p-2 text-lg border-slate-400'}>Empty</div>
                     )}
                 </div>
             </div>
