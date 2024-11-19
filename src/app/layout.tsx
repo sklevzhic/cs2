@@ -8,6 +8,7 @@ import { Header } from '@/widgets/header/ui/header';
 import { Footer } from '@/widgets/footer/ui/footer';
 import { ToastProvider } from '@/app/providers/toast-provider';
 import { ChatAssistant } from '@/widgets/chat-assistant/chat-assistant';
+import Head from 'next/head';
 
 export const metadata: Metadata = {
     title: 'CS SKINS',
@@ -17,6 +18,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="en">
+            <Head>
+                <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+            </Head>
             <body>
                 <ToastProvider>
                     <Header />

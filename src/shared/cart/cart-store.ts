@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-
-import { Product } from '@/shared/types/chats';
+import { Product } from '@/shared/types/product';
 
 export interface ProductWithQuantity extends Product {
     quantity: number;

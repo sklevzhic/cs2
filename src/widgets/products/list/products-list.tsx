@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Icon from '@/shared/ui/icon';
 import { ProductCardMini } from '@/shared/ui/product-card-mini';
 import { useCart } from '@/shared/cart/cart-store';
-import { Product } from '@/shared/types/chats';
+import { Product } from '@/shared/types/product';
 
 interface ProductsListProps {
     products: Product[];

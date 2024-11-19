@@ -5,7 +5,7 @@ interface ProductCardMiniProps {
     onClick?: () => void;
     image: string;
     title: string;
-    price: string;
+    price: string | number;
     onClickAddToCart: () => void;
     isAddedToCart: boolean;
 }
