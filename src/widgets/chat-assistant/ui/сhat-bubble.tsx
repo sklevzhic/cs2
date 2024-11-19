@@ -16,8 +16,8 @@ export const ChatBubble: FC<ChatBubbleProps> = ({ messages }) => {
     const defaultMessage: ChatMessage = {
         _id: '11',
         timestamp: new Date().toISOString(),
-        content: `Welcome to our online consultant for purchasing Counter-Strike skins! 🎮\nHow can we assist you today?\n\n1. Help with skin selection\n2. Information about prices and promotions\n3. Support and questions\n\nPlease select an option or ask your question.`,
-        chatId: 'dedault',
+        content: `Welcome to our online consultant for purchasing Counter-Strike skins! 🎮\nHow can we assist you today?\n\n1. Help with skin selection\n2. Information about prices and promotions\n3. Support and questions\n\nPlease ask your question.`,
+        chatId: 'default',
         isUser: false,
         sender: 'Support',
         telegramMessageId: 1,

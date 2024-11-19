@@ -19,12 +19,26 @@ export const Message: FC<MessageProps> = ({ text, time, align = 'left', isUser =
         hour12: false,
     }).format(date);
 
-    const contentWithBreaks = text.split('\n').map((line, index) => (
-        <React.Fragment key={index}>
-            {line}
-            <br />
-        </React.Fragment>
-    ));
+    const contentWithBreaks = text.split('\n').map((line, index) => {
+        return (
+            <React.Fragment key={index}>
+                {line.split(' ').map((word, wordIndex) => {
+                    const urlPattern = /^(https?:\/\/[^\s]+)$/;
+                    if (urlPattern.test(word)) {
+                        return (
+                            <React.Fragment key={wordIndex}>
+                                <a href={word} target="_blank" rel="noopener noreferrer">
+                                    {word}
+                                </a>{' '}
+                            </React.Fragment>
+                        );
+                    }
+                    return word + ' ';
+                })}
+                <br />
+            </React.Fragment>
+        );
+    });
 
     return (
         <div className={classNames(`grid overflow-hidden ${align === 'right' ? 'text-right' : ''}`, className)}>

@@ -7,6 +7,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 const SOCKET_URL = 'http://3.70.1.9:5015';
 const API_BASE_URL = 'http://3.70.1.9:5015/api';
+const JOIN_CHAT_EVENT = 'joinChat';
+const LEAVE_CHAT_EVENT = 'leaveChat';
+const CHAT_MESSAGE_EVENT = 'chatMessage';
+const LOCAL_STORAGE_CHAT_KEY = 'chatKey';
 
 const socket = io(SOCKET_URL, {
     transports: ['websocket', 'polling'],
@@ -52,17 +56,17 @@ export const useChatStore = create<ChatStore>((set, get) => ({
         const chatId = get().chatId;
         if (!chatId) get().generateAndStoreKey();
 
-        socket.emit('joinChat', chatId);
+        socket.emit(JOIN_CHAT_EVENT, chatId);
 
-        socket.on('chatMessage', (message: ChatMessage) => {
+        socket.on(CHAT_MESSAGE_EVENT, (message: ChatMessage) => {
             get().addMessage(message);
         });
     },
 
     leaveChat: () => {
         const chatId = get().chatId;
-        if (chatId) socket.emit('leaveChat', chatId);
-        socket.off('chatMessage');
+        if (chatId) socket.emit(LEAVE_CHAT_EVENT, chatId);
+        socket.off(CHAT_MESSAGE_EVENT);
     },
 
     fetchChatHistory: async () => {
@@ -75,7 +79,7 @@ export const useChatStore = create<ChatStore>((set, get) => ({
             });
             set({ messages: response.data });
         } catch (error) {
-            console.error(error);
+            console.error('Error fetching chat history:', error);
         }
     },
 
@@ -84,8 +88,8 @@ export const useChatStore = create<ChatStore>((set, get) => ({
         if (!chatId) return;
 
         const message: MessageCreationAttributes = { chatId, content };
-        socket.emit('chatMessage', message, (ack: { success: boolean; error?: string }) => {
-            if (!ack.success) console.error(ack.error);
+        socket.emit(CHAT_MESSAGE_EVENT, message, (ack: { success: boolean; error?: string }) => {
+            if (!ack.success) console.error('Error sending message:', ack.error);
         });
     },
 
@@ -93,10 +97,10 @@ export const useChatStore = create<ChatStore>((set, get) => ({
     closeChat: () => set({ isOpen: false }),
     addMessage: (message: ChatMessage) => set((state) => ({ messages: [...state.messages, message] })),
     generateAndStoreKey: () => {
-        let storedKey = localStorage.getItem('chatKey');
+        let storedKey = localStorage.getItem(LOCAL_STORAGE_CHAT_KEY);
         if (!storedKey) {
             storedKey = uuidv4();
-            localStorage.setItem('chatKey', storedKey);
+            localStorage.setItem(LOCAL_STORAGE_CHAT_KEY, storedKey);
         }
         set({ chatId: storedKey });
     },
