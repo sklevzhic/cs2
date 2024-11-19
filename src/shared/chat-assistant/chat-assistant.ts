@@ -5,7 +5,14 @@ import { io } from 'socket.io-client';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
-const socket = io('http://3.70.1.9:5015/');
+const SOCKET_URL = 'http://3.70.1.9:5015';
+const API_BASE_URL = 'http://3.70.1.9:5015/api';
+
+const socket = io(SOCKET_URL, {
+    transports: ['websocket', 'polling'],
+    rejectUnauthorized: false,
+    reconnection: true,
+});
 
 export interface ChatMessage {
     isUser?: boolean;
@@ -27,7 +34,7 @@ interface ChatStore {
     messages: ChatMessage[];
     chatId: string;
     joinChat: () => void;
-    leftChat: () => void;
+    leaveChat: () => void;
     fetchChatHistory: () => void;
     sendMessage: (content: string) => void;
     toggleChat: () => void;
@@ -43,6 +50,8 @@ export const useChatStore = create<ChatStore>((set, get) => ({
 
     joinChat: () => {
         const chatId = get().chatId;
+        if (!chatId) get().generateAndStoreKey();
+
         socket.emit('joinChat', chatId);
 
         socket.on('chatMessage', (message: ChatMessage) => {
@@ -50,36 +59,39 @@ export const useChatStore = create<ChatStore>((set, get) => ({
         });
     },
 
-    leftChat: () => {
+    leaveChat: () => {
+        const chatId = get().chatId;
+        if (chatId) socket.emit('leaveChat', chatId);
         socket.off('chatMessage');
     },
 
     fetchChatHistory: async () => {
         const chatId = get().chatId;
+        if (!chatId) return;
+
         try {
-            const response = await axios.get(`http://3.70.1.9:5015/api/chat/history/${chatId}`);
+            const response = await axios.get(`${API_BASE_URL}/chat/history/${chatId}`, {
+                httpAgent: new (require('http').Agent)({ rejectUnauthorized: false }),
+            });
             set({ messages: response.data });
         } catch (error) {
-            console.error('Ошибка при получении истории чата:', error);
+            console.error(error);
         }
     },
 
     sendMessage: (content: string) => {
         const chatId = get().chatId;
-        const message: MessageCreationAttributes = {
-            chatId,
-            content: content,
-        };
-        socket.emit('chatMessage', message);
+        if (!chatId) return;
+
+        const message: MessageCreationAttributes = { chatId, content };
+        socket.emit('chatMessage', message, (ack: { success: boolean; error?: string }) => {
+            if (!ack.success) console.error(ack.error);
+        });
     },
 
     toggleChat: () => set((state) => ({ isOpen: !state.isOpen })),
     closeChat: () => set({ isOpen: false }),
-
-    addMessage: (message: ChatMessage) => {
-        set((state) => ({ messages: [...state.messages, message] }));
-    },
-
+    addMessage: (message: ChatMessage) => set((state) => ({ messages: [...state.messages, message] })),
     generateAndStoreKey: () => {
         let storedKey = localStorage.getItem('chatKey');
         if (!storedKey) {

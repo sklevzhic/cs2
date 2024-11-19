@@ -8,7 +8,7 @@ import { Chat } from '@/widgets/chat-assistant/ui/chat';
 import { useChatStore } from '@/shared/chat-assistant/chat-assistant';
 
 export const ChatAssistant = () => {
-    const { isOpen, messages, joinChat, chatId, generateAndStoreKey, leftChat, fetchChatHistory, sendMessage, toggleChat, closeChat } = useChatStore();
+    const { isOpen, messages, joinChat, chatId, generateAndStoreKey, leaveChat, fetchChatHistory, sendMessage, toggleChat, closeChat } = useChatStore();
 
     const [mounted, setMounted] = useState(false);
 
@@ -34,7 +34,7 @@ export const ChatAssistant = () => {
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
-            leftChat();
+            leaveChat();
         };
     }, [joinChat, fetchChatHistory, closeChat]);
 

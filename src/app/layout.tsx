@@ -19,7 +19,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     return (
         <html lang="en">
             <Head>
-                <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+                <meta httpEquiv="Content-Security-Policy" content="default-src https: http:; script-src 'self' http: https:;" />
             </Head>
             <body>
                 <ToastProvider>
