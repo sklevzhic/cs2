@@ -3,19 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NEXT_PUBLIC_THEME=system PORT=5000 next dev",
-    "dev:dark": "cross-env NEXT_PUBLIC_THEME=dark PORT=5001 next dev",
-    "dev:blue": "cross-env NEXT_PUBLIC_THEME=blue PORT=5002 next dev",
-    "build": "cross-env NEXT_PUBLIC_THEME=system NEXT_PUBLIC_BUILD_DIR=out/system next build",
-    "build:dark": "cross-env NEXT_PUBLIC_THEME=dark NEXT_PUBLIC_BUILD_DIR=out/dark next build",
-    "build:blue": "cross-env NEXT_PUBLIC_THEME=blue NEXT_PUBLIC_BUILD_DIR=out/blue next build",
-    "start": "cross-env NEXT_PUBLIC_THEME=system PORT=5000 NEXT_PUBLIC_BUILD_DIR=out/system next start",
-    "start:dark": "cross-env NEXT_PUBLIC_THEME=system PORT=5001 NEXT_PUBLIC_BUILD_DIR=out/dark next start",
-    "start:blue": "cross-env NEXT_PUBLIC_THEME=blue PORT=5002 NEXT_PUBLIC_BUILD_DIR=out/blue next start",
-    "lint": "next lint",
-    "lint:fix": "npx eslint . --fix"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
-
   "dependencies": {
     "@eslint/js": "^9.12.0",
     "@hookform/resolvers": "^3.9.0",
