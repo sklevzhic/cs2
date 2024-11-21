@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import './globals.css';
 import 'react-toastify/dist/ReactToastify.css';
+import './styles.css';
 
 import React from 'react';
 import { ModalProvider } from '@/app/providers';
@@ -9,6 +9,7 @@ import { Header } from '@/widgets/header/ui/header';
 import { Footer } from '@/widgets/footer/ui/footer';
 import { ChatAssistant } from '@/widgets/chat-assistant/chat-assistant';
 import Head from 'next/head';
+import { ThemeProvider } from 'next-themes';
 
 export const metadata: Metadata = {
     title: 'CS SKINS - Best Marketplace for Skins',
@@ -30,12 +31,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             </Head>
             <body>
                 <ToastProvider>
-                    <Header />
-                    <main className="pt-24 w-full mx-auto">{children}</main>
-                    <Footer />
-                    <ChatAssistant />
+                    <ThemeProvider forcedTheme={'system'}>
+                        <Header />
+                        <main className="pt-24 w-full mx-auto">{children}</main>
+                        <Footer />
+                        <ChatAssistant />
+                    </ThemeProvider>
+                    <ModalProvider />
                 </ToastProvider>
-                <ModalProvider />
             </body>
         </html>
     );

@@ -9,7 +9,7 @@ interface Props extends LucideProps {
 const Icon = ({ name, color = 'black', size = 24, ...props }: Props) => {
     const LucideIcon = icons[name];
 
-    return <LucideIcon color={color} size={size} {...props} />;
+    return <LucideIcon color={color} className={'text-blue-500'} size={size} {...props} />;
 };
 
 export default Icon;

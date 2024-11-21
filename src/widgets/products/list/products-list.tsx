@@ -90,8 +90,8 @@ export const ProductInfo = (props: ProductInfoProps) => {
                     onClick={() => {
                         router.push('/shop');
                     }}
-                    color={'hsl(223, 66%, 44%)'}
-                    className={'border p-2 cursor-pointer border-secondary rounded-full'}
+                    color={'hsl(var(--primary))'}
+                    className={'border border-gray-600 p-2 cursor-pointer rounded-full'}
                     size={40}
                     name={'ArrowLeft'}
                 />

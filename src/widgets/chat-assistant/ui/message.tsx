@@ -48,9 +48,7 @@ export const Message: FC<MessageProps> = ({ text, time, align = 'left', isUser =
     return (
         <div className={classNames(`grid overflow-hidden ${align === 'right' ? 'text-right' : ''}`, className)}>
             <div className={`px-3.5 py-2 rounded ${isUser ? 'bg-primary' : 'bg-gray-100 !text-gray-900'}`}>
-                <h5 className={`text-sm break-all font-normal ${isUser ? 'text-secondary-foreground' : 'text-primary-foreground'} leading-snug`}>
-                    {contentWithBreaks}
-                </h5>
+                <h5 className={`text-sm break-all font-normal ${isUser ? 'text-white' : 'text-dark'} leading-snug`}>{contentWithBreaks}</h5>
             </div>
             <div className="justify-end items-center inline-flex mb-2.5">
                 <h6 className="text-xs font-normal leading-4 py-1 text-gray-500">{_time}</h6>

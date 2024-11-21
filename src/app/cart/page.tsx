@@ -18,7 +18,7 @@ export default function ContactsPage() {
                             onClick={() => {
                                 router.back();
                             }}
-                            color={'hsl(223, 66%, 44%)'}
+                            color={'hsl(var(--primary))'}
                             className={'border p-2 cursor-pointer border-gray-600 rounded-full mr-3'}
                             size={35}
                             name={'ArrowLeft'}

@@ -17,7 +17,7 @@ export const CartCountHandler = (props: CartCountHandlerProps) => {
                     name={'ShoppingCart'}
                     className={`p-1 rounded-full cursor-pointer hover:border hover:border-primaryHover ${isAddedToCart ? 'bg-primary' : 'bg-inherit'}`}
                     size={size}
-                    color={!isAddedToCart ? 'hsl(223, 66%, 44%)' : 'white'}
+                    color={!isAddedToCart ? 'hsl(var(--primary))' : 'hsl(var(--primary-foreground))'}
                     onClick={(event) => {
                         event?.stopPropagation();
                         onClick?.();

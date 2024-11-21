@@ -6,7 +6,7 @@ export default function ShopPage() {
     return (
         <>
             <div className="rounded-2xl px-4 lg:px-6 w-full max-w-7xl mx-auto  mb-10">
-                <div className="flex flex-col gap-14 md:flex-row items-center lg:gap32">
+                <div className="flex flex-col gap-14 md:flex-row min-h-[50dvh] mt-4 lg:gap32">
                     <Suspense>
                         <ProductsList products={products} />
                     </Suspense>

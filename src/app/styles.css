@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+:root {
+    height: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@layer base {
+    :root {
+        --background:0, 0%, 95%; /* Темный фон */
+        --foreground: 0, 0%, 100%; /* Светлый текст */
+
+        --card: 0, 0%, 100%; /* Фон карточек */
+        --card-foreground: 0, 0%, 80%; /* Текст на карточках */
+
+        --popover: 220, 10%, 30%; /* Всплывающий фон */
+        --popover-foreground: 0, 0%, 80%; /* Текст всплывающего окна */
+
+        --primary: 223, 66%, 44%; /* Основной акцентный цвет */
+        --primary-hover: 224, 85%, 26%; /* Акцентный цвет при наведении */
+        --primary-foreground: 0, 0%, 0%; /* Текст на акцентном цвете */
+
+        --secondary: 0, 0%, 9%; /* Вторичный цвет */
+        --secondary-foreground: 0, 0%, 100%; /* Текст на вторичном фоне */
+
+        --bg-form-color: 205, 66%, 44%;
+        --bg-form-color-from: 223, 66%, 44%;
+        --bg-form-color-to: 223, 66%, 44%;
+
+        --muted: 220, 10%, 40%; /* Приглушённый цвет */
+        --muted-foreground: 0, 0%, 100%; /* Текст на приглушённом фоне */
+
+        --accent: 210, 100%, 40%; /* Акцентный цвет */
+        --accent-foreground: 0, 0%, 80%; /* Текст на акцентном фоне */
+
+        --destructive: 0, 100%, 60%; /* Разрушающий цвет */
+        --destructive-foreground: 0, 0%, 80%; /* Текст на разрушающем фоне */
+
+        --border: 220, 10%, 30%; /* Цвет границы */
+        --input: 220, 10%, 30%; /* Фон ввода */
+        --ring: 210, 100%, 60%; /* Цвет кольца */
+
+        --radius: 0.75rem; /* Закругленные углы */
+    }
+
+    [data-theme='blue'] {
+        --background: 220, 81%, 11%; /* Темный фон #15171C */
+        --foreground: 0, 0%, 90%; /* Светлый текст */
+
+        --card: 220, 10%, 15%; /* Фон карточек */
+        --card-foreground: 0, 0%, 90%; /* Текст на карточках */
+
+        --popover: 220, 10%, 20%; /* Всплывающий фон */
+        --popover-foreground: 0, 0%, 90%; /* Текст всплывающего окна */
+
+        --primary: 210, 100%, 50%; /* Основной акцентный цвет (яркий синий) */
+        --primary-hover: 210, 100%, 40%; /* Акцентный цвет при наведении */
+        --primary-foreground: 0, 0%, 100%; /* Текст на акцентном цвете */
+
+        --secondary: 0, 0%, 80%; /* Вторичный цвет (яркий синий) */
+        --secondary-foreground: 210, 50%, 20%; /* Текст на вторичном фоне */
+
+        --bg-form-color: 211, 100%, 32%;
+        --bg-form-color-from: 210, 100%, 50%;
+        --bg-form-color-to: 210, 100%, 50%;
+
+        --muted: 220, 10%, 30%; /* Приглушённый цвет */
+        --muted-foreground: 0, 0%, 90%; /* Текст на приглушённом фоне */
+
+        --accent: 210, 100%, 30%; /* Акцентный цвет (яркий синий) */
+        --accent-foreground: 0, 0%, 90%; /* Текст на акцентном фоне */
+
+        --destructive: 0, 100%, 50%; /* Разрушающий цвет (яркий красный) */
+        --destructive-foreground: 0, 0%, 90%; /* Текст на разрушающем фоне */
+
+        --border: 220, 10%, 20%; /* Цвет границы */
+        --input: 220, 10%, 20%; /* Фон ввода */
+        --ring: 210, 100%, 50%; /* Цвет кольца */
+
+        --radius: 0.5rem; /* Закругленные углы */
+    }
+
+    [data-theme='dark'] {
+        --background: 240 12% 13%;
+        --foreground: 0 0% 90%;
+
+        --card: 220 10% 15%;
+        --card-foreground: 0 0% 90%;
+
+        --popover: 220 10% 20%;
+        --popover-foreground: 0 0% 90%;
+
+        --primary: 21 95.1% 52.4%;
+        --primary-hover: 21 70% 52.4%;
+        --primary-foreground: 0, 0%, 95%;
+
+        --secondary: 0 0% 86%;
+        --secondary-foreground: 220, 15%, 20%;
+
+        --bg-form-color: 33 95.1% 52.4%;
+        --bg-form-color-from: 21 95.1% 52.4%;
+        --bg-form-color-to: 21 95.1% 52.4%;
+
+        --muted: 220 10% 30%;
+        --muted-foreground: 0 0% 90%;
+
+        --accent: 210 100% 30%;
+        --accent-foreground: 0 0% 90%;
+
+        --destructive: 0 100% 50%;
+        --destructive-foreground: 0 0% 90%;
+
+        --border: 220 10% 20%;
+        --input: 220 10% 20%;
+        --ring: 210 100% 50%;
+
+        --radius: 0.5rem; /* Скругление углов */
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}

@@ -1,7 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
-    plugins: [require('tailwindcss-animate'), require('tailwind-scrollbar')],
+    plugins: [require('tailwindcss-animate')],
     content: [
         './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
         './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -42,6 +42,9 @@ const config: Config = {
                     DEFAULT: 'hsl(var(--secondary))',
                     foreground: 'hsl(var(--secondary-foreground))',
                 },
+                bgFormColor: 'hsl(var(--bg-form-color))',
+                bgFormColorFrom: 'hsl(var(--bg-form-color-from))',
+                bgFormColorTo: 'hsl(var(--bg-form-color-to))',
                 destructive: {
                     DEFAULT: 'hsl(var(--destructive))',
                     foreground: 'hsl(var(--destructive-foreground))',
@@ -81,9 +84,6 @@ const config: Config = {
             animation: {
                 'accordion-down': 'accordion-down 0.2s ease-out',
                 'accordion-up': 'accordion-up 0.2s ease-out',
-            },
-            wordBreak: {
-                all: 'break-all',
             },
         },
     },

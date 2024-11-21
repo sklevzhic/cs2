@@ -5,8 +5,8 @@ import { io } from 'socket.io-client';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
-const SOCKET_URL = 'http://3.70.1.9:5015';
-const API_BASE_URL = 'http://3.70.1.9:5015/api';
+const SOCKET_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const API_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL + '/api';
 const JOIN_CHAT_EVENT = 'joinChat';
 const LEAVE_CHAT_EVENT = 'leaveChat';
 const CHAT_MESSAGE_EVENT = 'chatMessage';

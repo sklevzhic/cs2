@@ -29,13 +29,13 @@ export const Chat: FC<ChatProps> = ({ chats, onClose, onSend }) => {
 
     return (
         <div ref={chatRef} className="w-full h-[98vh] sm:w-[350px] sm:h-[500px] bg-white shadow rounded-xl overflow-hidden flex flex-col">
-            <div className={'bg-blue-600 flex justify-between items-center'}>
+            <div className={'bg-primary flex justify-between items-center'}>
                 <div className={'flex items-center p-2'}>
                     <img width={35} height={35} src="/images/logo-assistant.png" alt="" />
                     <span className={'text-foreground'}>Assistant</span>
                 </div>
                 <div className={'p-2'}>
-                    <Button variant={'ghost'} onClick={onClose} className={'border border-primary bg-secondary-foreground !rounded-full w-8 h-8 !p-1'}>
+                    <Button variant={'ghost'} onClick={onClose} className={'border border-primary bg-white !rounded-full w-8 h-8 !p-1'}>
                         <Icon name={'X'} className={'text-primary'}></Icon>
                     </Button>
                 </div>
